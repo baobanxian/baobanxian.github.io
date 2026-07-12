@@ -1,0 +1,22 @@
+{
+  "feeds": [
+    {
+      "url": "https://www.ruanyifeng.com/blog/atom.xml",
+      "label": "阮一峰的网络日志",
+      "type": "Atom",
+      "active": true
+    },
+    {
+      "url": "https://tech.meituan.com/feed",
+      "label": "美团技术团队",
+      "type": "RSS 2.0",
+      "active": true
+    },
+    {
+      "url": "https://hnrss.org/frontpage",
+      "label": "Hacker News Front Page",
+      "type": "RSS 2.0",
+      "active": true
+    }
+  ]
+}

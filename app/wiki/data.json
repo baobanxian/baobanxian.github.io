@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "research-paper-collector-reflection",
+    "title": "关于 Research Paper Collector SKILL 的课堂反思",
+    "updated": "2026-07-11",
+    "tags": [
+      "技能",
+      "论文收集",
+      "arXiv",
+      "AI-Agent"
+    ],
+    "html": "<h2>我的原话</h2>\n<p>> [张方宇] 今天我们在课堂上一起完成了 <code>research-paper-collector</code> 技能的搭建。整个过程包括：定义 SKILL.md 的工作流、编写 <code>collect_papers.py</code> 和 <code>check_papers.py</code> 脚本、创建 <code>check-site.sh</code> 零依赖检查脚本，最后把这些集成到网站中。</p>\n<p>> [张方宇] 我特别注意到数据路径的问题——脚本里用了绝对路径 <code>/public/data/papers.json</code>，但实际项目根目录在 <code>/Users/baobanxian/my-portfolio</code>，如果不改成相对路径就会写出到系统根目录。这个 bug 是在运行检查脚本时才暴露的。</p>\n<p>> [张方宇] 零依赖的 <code>check-site.sh</code> 让我印象很深。它只用 bash 和 perl（macOS 自带），不需要装任何包，适合放在 CI 的第一个步骤做快速健康检查。</p>\n<h2>Agent 总结</h2>\n<p>根据对话记录，Agent 完成了以下工作：</p>\n<p>1. 创建 <code>.opencode/skills/research-paper-collector/SKILL.md</code>，包含工作流、输入参数和安全规则</p>\n<p>2. 创建 <code>references/topics.md</code>，提供中文主题到 arXiv 查询词的映射</p>\n<p>3. 编写 <code>scripts/collect_papers.py</code>，调用 arXiv API 获取论文，以 id 去重</p>\n<p>4. 编写 <code>scripts/check_papers.py</code>，验证必需字段、重复 id、URL 格式</p>\n<p>5. 运行收集脚本，成功获取 10 篇 AI Agent 相关论文</p>\n<p>6. 修复 <code>check_papers.py</code> 中 URL scheme 只允许 https 的断言——arXiv API 返回的是 http 链接</p>\n<p>7. 将脚本的 OUTPUT 路径从绝对路径改为基于 <code>__file__</code> 的相对路径</p>\n<p>8. 更新 <code>app/papers/page.tsx</code>，从 <code>public/data/papers.json</code> 读取并展示论文列表</p>\n<p>9. 编写 <code>scripts/check-site.sh</code>，零依赖 bash 脚本，覆盖必要页面、站内链接、RSS XML 检查</p>\n<h2>我的反思</h2>\n<p>这次实践让我意识到几个关键点：</p>\n<p>1. <strong>路径问题容易在\"最后一公里\"暴露</strong>。脚本在本地跑没问题，但部署到 CI 或不同机器就可能出问题。以后写脚本应该优先用相对于脚本位置的路径。</p>\n<p>2. <strong>外部 API 的返回格式不能假设</strong>。arXiv API 返回的 URL 是 http 而非 https，这提醒我们在写验证逻辑时要对实际数据做探查，而不是凭想象写断言。</p>\n<p>3. <strong>零依赖工具链的价值</strong>。bash 写的检查脚本可以在任何 POSIX 环境运行，不依赖 node_modules，适合做 CI 快速门禁。</p>\n<h2>相关 Wiki 页面</h2>\n<ul>\n<li><a href=\"/wiki/research-paper-collector-skill\">Research Paper Collector 技能定义</a></li>\n<li><a href=\"/wiki/site-health-check\">Site Health Check 脚本设计</a></li>\n</ul>"
+  },
+  {
+    "slug": "research-paper-collector-skill",
+    "title": "Research Paper Collector 技能定义",
+    "updated": "2026-07-11",
+    "tags": [
+      "技能",
+      "opencode",
+      "arXiv"
+    ],
+    "html": "<h2>概述</h2>\n<p><code>research-paper-collector</code> 是一个 opencode 技能，用于自动收集指定领域最新 arXiv 论文并更新网站数据。</p>\n<h2>工作流</h2>\n<p>1. 从 <code>references/topics.md</code> 读取主题-查询词映射</p>\n<p>2. 调用 <code>collect_papers.py</code> 获取 arXiv 论文</p>\n<p>3. 以 arXiv id 去重，验证必填字段</p>\n<p>4. 运行 <code>check_papers.py</code> 进行完整性检查</p>\n<p>5. 报告 fetched / new / saved 三个数字</p>\n<h2>安全规则</h2>\n<ul>\n<li>论文链接必须来自配置的数据源</li>\n<li>不能把预印本描述成已经同行评审</li>\n<li>没有新论文时不改写文件</li>\n<li>网络失败时保留原数据</li>\n</ul>\n<p>详见 <a href=\"/wiki/research-paper-collector-reflection\">课堂反思</a>。</p>"
+  },
+  {
+    "slug": "site-health-check",
+    "title": "Site Health Check 脚本设计",
+    "updated": "2026-07-11",
+    "tags": [
+      "脚本",
+      "测试",
+      "CI"
+    ],
+    "html": "<h2>概述</h2>\n<p><code>scripts/check-site.sh</code> 是一个零依赖的网站健康检查脚本，用于在部署前快速验证站点完整性。</p>\n<h2>检查项</h2>\n<div class=\"overflow-x-auto\"><table>\n<tr><td>检查</td><td>覆盖内容</td></tr>\n<tr><td>------</td><td>----------</td></tr>\n<tr><td>必要页面</td><td>9 个核心 HTML 和 XML 文件是否存在</td></tr>\n<tr><td>站内链接</td><td>从 HTML 中提取所有 <code><a href></code>，解析本地路径</td></tr>\n<tr><td>RSS XML</td><td>XML 结构 + <code><channel>/<title>/<item>/<link></code> 完备性</td></tr>\n</table></div>\n<h2>设计特点</h2>\n<ul>\n<li>纯 bash + perl，零 npm 依赖</li>\n<li>跳过 mailto / https 等外部链接</li>\n<li>自动处理 <code>trailingSlash</code>（<code>/about/</code> → <code>/about/index.html</code>）</li>\n</ul>\n<p>详见 <a href=\"/wiki/research-paper-collector-reflection\">课堂反思</a>。</p>"
+  }
+]
