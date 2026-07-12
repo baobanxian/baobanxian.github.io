@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "npm run generate && npm run generate-wiki && npm run fetch-articles",
     "dev": "next dev",
     "generate": "node scripts/generate-posts.mjs",
     "generate-feed": "node scripts/generate-feed.mjs",
