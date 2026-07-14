@@ -1,0 +1,125 @@
+1:"$Sreact.fragment"
+2:I[88106,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+3:I[39756,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+4:I[37457,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+5:I[22016,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],""]
+7:I[97367,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+b:I[97367,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+d:I[97367,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+f:I[68027,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
+:HL["/_next/static/chunks/2y5raihyjwbyf.css","style"]
+:HL["/_next/static/media/GeistMono_Variable-s.p.3ms9vq719j3f8.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"P":null,"c":["","blog","gitlab-ci-to-github-pages",""],"q":"","i":false,"f":[[["",{"children":["blog",{"children":[["slug","gitlab-ci-to-github-pages","d",null],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2y5raihyjwbyf.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/2eud1c446484m.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","className":"geistsans_e915802e-module__wCJ9tq__variable geistmono_7182bcca-module__AnTA8W__variable h-full antialiased","children":["$","body",null,{"className":"h-dvh flex flex-col bg-gradient-to-br from-sky-50 via-stone-50 to-gray-100","children":[["$","$L2",null,{}],["$","div",null,{"className":"flex-1","children":["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","main",null,{"className":"flex min-h-full items-center justify-center px-6 pt-14","children":["$","div",null,{"className":"max-w-md text-center bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-12","children":[["$","h1",null,{"className":"text-6xl font-bold text-gray-300 mb-4","children":"404"}],["$","p",null,{"className":"text-lg text-gray-500 mb-6","children":"页面不存在"}],["$","$L5",null,{"href":"/","className":"inline-block rounded-full bg-black/10 px-6 py-2 text-sm font-medium text-gray-700 hover:bg-black/20 transition-colors","children":"返回首页"}]]}]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":["$L6",null,["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]]}],{},null,false,null]},null,false,"$@a"]},null,false,"$@a"]},null,false,null],["$","$1","h",{"children":[null,["$","$Lb",null,{"children":"$Lc"}],["$","div",null,{"hidden":true,"children":["$","$Ld",null,{"children":["$","$8",null,{"name":"Next.Metadata","children":"$Le"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],false]],"m":"$undefined","G":["$f",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2y5raihyjwbyf.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"7qIbyPEMaK7ucmzIv__M-"}
+10:[]
+a:"$W10"
+11:T13be,<p>本以为"在 GitLab 编写代码、自动构建，然后一键部署到 GitHub Pages 展示"是一个半小时就能搞定的简单任务。</p>
+<p>然而，在打通 <strong>"GitLab CI（加工厂） ➡️ GitHub Pages（展示柜）"</strong> 链路的过程中，我结结实实地踩了四个大坑。以下是我的血泪排障记录，希望帮大家少走弯路。</p>
+<p>---</p>
+<h3>坑 1：GitLab Runner 权限不足（Docker-in-Docker 报错）</h3>
+<p>* <strong>现象</strong>：流水线刚启动，Docker 守护进程就报错崩溃：</p>
+<p>  ```text</p>
+<p>  mount: permission denied (are you root?)</p>
+<p>  Cannot connect to the Docker daemon at tcp://docker:2375.</p>
+<p>  ```</p>
+<p>* <strong>原因</strong>：自建的 GitLab Runner 默认没有开启特权模式，导致嵌套的 Docker 容器无法挂载系统安全目录。</p>
+<p>* <strong>解法</strong>：修改宿主机上的 <code>/etc/gitlab-runner/config.toml</code>，在 <code>[runners.docker]</code> 下面将特权模式开启：</p>
+<p>  ```toml</p>
+<p>  privileged = true</p>
+<p>  ```</p>
+<p>---</p>
+<h3>坑 2：样式丢失，网页白屏（Jekyll 屏蔽 <code>_next</code>）</h3>
+<p>* <strong>现象</strong>：网页部署成功，但打开全是白屏，查看控制台，发现 <code>_next/static</code> 下的所有 CSS 和 JS 文件全部 404。</p>
+<p>* <strong>原因</strong>：GitHub Pages 默认用 Jekyll 引擎解析静态网页，而 Jekyll 会<strong>自动忽略任何下划线 <code>_</code> 开头的文件夹</strong>（包括 Next.js 核心的 <code>_next</code>）。</p>
+<p>* <strong>解法</strong>：必须在部署根目录下生成一个空文件 <strong><code>.nojekyll</code></strong>，强行禁用 Jekyll 引擎。</p>
+<p>---</p>
+<h3>坑 3：通配符 <code>*</code> 漏掉了点（隐藏）文件</h3>
+<p>* <strong>现象</strong>：明明在脚本里写了 <code>touch gh-pages/.nojekyll</code>，推送上去后依然 404，发现该文件根本没被提交。</p>
+<p><em> <strong>原因</strong>：传统的 <code>cp -r out/</em> gh-pages/</code> 拷贝命令，其中的 <code>*</code> 默认<strong>无法匹配到以 <code>.</code> 开头的隐藏文件</strong>（如 <code>.nojekyll</code>）。</p>
+<p>* <strong>解法</strong>：改用末尾带点号的拷贝命令：</p>
+<p>  ```bash</p>
+<p>  cp -r out/. gh-pages/</p>
+<p>  ```</p>
+<p>---</p>
+<h3>坑 4：GitLab Pages 本地静态目录"套娃"</h3>
+<p>* <strong>现象</strong>：部署在 GitLab Pages 备份站点的网页也 404 了。</p>
+<p>* <strong>原因</strong>：在脚本里直接运行了 <code>cp -r out/ public/</code>。但由于 Next.js 源码中原本就有一个 <code>public</code> 文件夹，导致 <code>cp</code> 命令自作聪明地把整个 <code>out</code> 拷贝到了 <code>public</code> 的内部（变成了 <code>public/out/index.html</code>）。</p>
+<p>* <strong>解法</strong>：拷贝前，先无情地强制清理掉原有目录：</p>
+<p>  ```bash</p>
+<p>  rm -rf public && cp -r out/ public/</p>
+<p>  ```</p>
+<p>---</p>
+<h3>💡 终极版 <code>.gitlab-ci.yml</code> 部署脚本</h3>
+<p>在搞定上述问题，并保证 <code>GITHUB_TOKEN</code> 变量名对齐后，我最终磨砺出了这一套能<strong>完美兼顾代码体检（Lint）、构建、并同时双发部署到 GitLab & GitHub</strong> 的极简配置：</p>
+<pre><code>image: node:20
+
+stages:
+  - lint
+  - build
+  - deploy
+
+cache:
+  key:
+    files:
+      - package-lock.json
+    prefix: $CI_COMMIT_REF_SLUG
+  paths:
+    - node_modules/
+    - .next/cache/
+
+lint:
+  stage: lint
+  script:
+    - npm ci
+    - npm run lint
+  only:
+    - main
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - out/
+    expire_in: 1 hour
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - rm -rf public
+    - cp -r out/ public/
+  artifacts:
+    paths:
+      - public/
+  only:
+    - main
+
+deploy-github:
+  stage: deploy
+  script:
+    - git clone --depth 1 https://baobanxian:${GITHUB_TOKEN}@github.com/baobanxian/baobanxian.github.io.git gh-pages
+    - rm -rf gh-pages/*
+    - cp -r out/. gh-pages/
+    - touch gh-pages/.nojekyll
+    - cd gh-pages
+    - git config user.name &quot;baobanxian&quot;
+    - git config user.email &quot;2793406287@qq.com&quot;
+    - git add .
+    - git diff --quiet &amp;&amp; git diff --staged --quiet || git commit -m &quot;Deploy $(date '+%Y-%m-%d %H:%M:%S')&quot;
+    - git push origin main
+  only:
+    - main</code></pre>
+<p>---</p>
+<h3>尾声：折腾后的收获</h3>
+<p>虽然这一遭"费了老劲"，但当看到 GitLab 和 GitHub 上同时亮起绿灯、个人主页也终于完美加载出来的那一刻，所有的抓耳挠腮都值了。</p>
+<p>技术有时候就是这样，看似十几行命令的简单流程，跨越不同的平台时却可能藏着各种不为人知的细节深坑。希望我这次用血泪摸索出来的经验，能帮正在阅读的你省下几个小时的排障时间。</p>
+<p><strong>祝大家流水线一路绿灯，部署顺利！</strong></p>6:["$","main",null,{"className":"flex min-h-full justify-center px-6 pt-24 pb-16","children":["$","article",null,{"className":"w-full max-w-2xl bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-10","children":[["$","$L5",null,{"href":"/blog","className":"inline-block text-sm text-gray-400 hover:text-blue-600 mb-6","children":"← 返回博客列表"}],["$","h1",null,{"className":"text-3xl font-bold mb-2","children":"折腾记：把 Next.js 个人主页从 GitLab CI 移植到 GitHub Pages 的踩坑实录"}],["$","p",null,{"className":"text-sm text-gray-400 mb-8","children":"2026-07-14"}],["$","div",null,{"className":"max-w-none [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-3 [&_p]:leading-relaxed [&_p]:mb-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-700 [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_code]:bg-gray-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:rounded-none [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4","dangerouslySetInnerHTML":{"__html":"$11"}}]]}]}]
+c:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+12:I[27201,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
+9:null
+e:[["$","title","0",{"children":"张方宇 - 个人主页"}],["$","meta","1",{"name":"description","content":"南京大学 软工经济创新班 张方宇的个人主页"}],["$","meta","2",{"property":"og:title","content":"张方宇 - 个人主页"}],["$","meta","3",{"property":"og:description","content":"南京大学 软工经济创新班 张方宇的个人主页"}],["$","meta","4",{"property":"og:url","content":"https://baobanxian.com/"}],["$","meta","5",{"property":"og:site_name","content":"张方宇"}],["$","meta","6",{"property":"og:locale","content":"zh_CN"}],["$","meta","7",{"property":"og:type","content":"website"}],["$","meta","8",{"name":"twitter:card","content":"summary"}],["$","meta","9",{"name":"twitter:title","content":"张方宇 - 个人主页"}],["$","meta","10",{"name":"twitter:description","content":"南京大学 软工经济创新班 张方宇的个人主页"}],["$","link","11",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L12","12",{}]]
