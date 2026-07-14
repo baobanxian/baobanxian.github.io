@@ -6,9 +6,13 @@ stages:
   - deploy
 
 cache:
-  key: $CI_COMMIT_REF_SLUG
+  key:
+    files:
+      - package-lock.json
+    prefix: $CI_COMMIT_REF_SLUG
   paths:
     - node_modules/
+    - .next/cache/
 
 lint:
   stage: lint
@@ -23,6 +27,8 @@ build:
   stage: build
   script:
     - npm ci
+    - npm run generate
+    - npm run generate-wiki
     - npm run build
   artifacts:
     paths:
@@ -45,7 +51,7 @@ pages:
 deploy-github:
   stage: deploy
   script:
-    - git clone https://baobanxian:${GITHUB_TOKEN}@github.com/baobanxian/baobanxian.github.io.git gh-pages
+    - git clone --depth 1 https://baobanxian:${GITHUB_TOKEN}@github.com/baobanxian/baobanxian.github.io.git gh-pages
     - rm -rf gh-pages/*
     - cp -r out/* gh-pages/
     - cd gh-pages
