@@ -19,15 +19,40 @@ lint:
     - merge_requests
     - main
 
-pages:
-  stage: deploy
+build:
+  stage: build
   script:
     - npm ci
     - npm run build
+  artifacts:
+    paths:
+      - out/
+    expire_in: 1 hour
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
     - cp -r out/ public/
     - bash scripts/check-site.sh public/
   artifacts:
     paths:
       - public/
+  only:
+    - main
+
+deploy-github:
+  stage: deploy
+  script:
+    - git clone https://baobanxian:${GITHUB_TOKEN}@github.com/baobanxian/baobanxian.github.io.git gh-pages
+    - rm -rf gh-pages/*
+    - cp -r out/* gh-pages/
+    - cd gh-pages
+    - git config user.name "baobanxian"
+    - git config user.email "2793406287@qq.com"
+    - git add .
+    - git diff --quiet && git diff --staged --quiet || git commit -m "Deploy $(date '+%Y-%m-%d %H:%M:%S')"
+    - git push origin main
   only:
     - main
