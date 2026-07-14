@@ -29,7 +29,7 @@ build:
     - npm ci
     - npm run generate
     - npm run generate-wiki
-    - npm run build
+    - npx next build
   artifacts:
     paths:
       - out/
