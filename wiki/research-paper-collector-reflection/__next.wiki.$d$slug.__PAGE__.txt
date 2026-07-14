@@ -1,0 +1,31 @@
+1:"$Sreact.fragment"
+2:I[22016,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],""]
+5:I[97367,["/_next/static/chunks/2eud1c446484m.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+3:Tb28,<h2>我的原话</h2>
+<p>> [张方宇] 今天我们在课堂上一起完成了 <code>research-paper-collector</code> 技能的搭建。整个过程包括：定义 SKILL.md 的工作流、编写 <code>collect_papers.py</code> 和 <code>check_papers.py</code> 脚本、创建 <code>check-site.sh</code> 零依赖检查脚本，最后把这些集成到网站中。</p>
+<p>> [张方宇] 我特别注意到数据路径的问题——脚本里用了绝对路径 <code>/public/data/papers.json</code>，但实际项目根目录在 <code>/Users/baobanxian/my-portfolio</code>，如果不改成相对路径就会写出到系统根目录。这个 bug 是在运行检查脚本时才暴露的。</p>
+<p>> [张方宇] 零依赖的 <code>check-site.sh</code> 让我印象很深。它只用 bash 和 perl（macOS 自带），不需要装任何包，适合放在 CI 的第一个步骤做快速健康检查。</p>
+<h2>Agent 总结</h2>
+<p>根据对话记录，Agent 完成了以下工作：</p>
+<p>1. 创建 <code>.opencode/skills/research-paper-collector/SKILL.md</code>，包含工作流、输入参数和安全规则</p>
+<p>2. 创建 <code>references/topics.md</code>，提供中文主题到 arXiv 查询词的映射</p>
+<p>3. 编写 <code>scripts/collect_papers.py</code>，调用 arXiv API 获取论文，以 id 去重</p>
+<p>4. 编写 <code>scripts/check_papers.py</code>，验证必需字段、重复 id、URL 格式</p>
+<p>5. 运行收集脚本，成功获取 10 篇 AI Agent 相关论文</p>
+<p>6. 修复 <code>check_papers.py</code> 中 URL scheme 只允许 https 的断言——arXiv API 返回的是 http 链接</p>
+<p>7. 将脚本的 OUTPUT 路径从绝对路径改为基于 <code>__file__</code> 的相对路径</p>
+<p>8. 更新 <code>app/papers/page.tsx</code>，从 <code>public/data/papers.json</code> 读取并展示论文列表</p>
+<p>9. 编写 <code>scripts/check-site.sh</code>，零依赖 bash 脚本，覆盖必要页面、站内链接、RSS XML 检查</p>
+<h2>我的反思</h2>
+<p>这次实践让我意识到几个关键点：</p>
+<p>1. <strong>路径问题容易在"最后一公里"暴露</strong>。脚本在本地跑没问题，但部署到 CI 或不同机器就可能出问题。以后写脚本应该优先用相对于脚本位置的路径。</p>
+<p>2. <strong>外部 API 的返回格式不能假设</strong>。arXiv API 返回的 URL 是 http 而非 https，这提醒我们在写验证逻辑时要对实际数据做探查，而不是凭想象写断言。</p>
+<p>3. <strong>零依赖工具链的价值</strong>。bash 写的检查脚本可以在任何 POSIX 环境运行，不依赖 node_modules，适合做 CI 快速门禁。</p>
+<h2>相关 Wiki 页面</h2>
+<ul>
+<li><a href="/wiki/research-paper-collector-skill">Research Paper Collector 技能定义</a></li>
+<li><a href="/wiki/site-health-check">Site Health Check 脚本设计</a></li>
+</ul>0:{"rsc":["$","$1","c",{"children":[["$","main",null,{"className":"flex min-h-full justify-center px-6 pt-24 pb-16","children":["$","article",null,{"className":"w-full max-w-2xl bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-10","children":[["$","$L2",null,{"href":"/wiki","className":"inline-block text-sm text-gray-400 hover:text-blue-600 mb-6","children":"← 返回 Wiki"}],["$","h1",null,{"className":"text-3xl font-bold mb-2","children":"关于 Research Paper Collector SKILL 的课堂反思"}],["$","div",null,{"className":"flex items-center gap-3 mb-8","children":[["$","p",null,{"className":"text-sm text-gray-400","children":["更新于 ","2026-07-11"]}],["$","div",null,{"className":"flex flex-wrap gap-1.5","children":[["$","span","技能",{"className":"text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full","children":"技能"}],["$","span","论文收集",{"className":"text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full","children":"论文收集"}],["$","span","arXiv",{"className":"text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full","children":"arXiv"}],["$","span","AI-Agent",{"className":"text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full","children":"AI-Agent"}]]}]]}],["$","div",null,{"className":"max-w-none [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-3 [&_p]:leading-relaxed [&_p]:mb-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-700 [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_code]:bg-gray-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:rounded-none [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_table]:w-full [&_table]:border-collapse [&_td]:border [&_td]:border-gray-200 [&_td]:px-3 [&_td]:py-2 [&_td]:text-sm","dangerouslySetInnerHTML":{"__html":"$3"}}]]}]}],null,"$L4"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"YB-RA4SnD5oXweYXx4Q9D"}
+4:["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]
+7:null
