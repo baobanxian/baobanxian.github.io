@@ -1,18 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>张方宇 - 博客</title>
-    <link>https://baobanxian.com</link>
-    <description>张方宇的个人博客</description>
-    <language>zh-CN</language>
-    <lastBuildDate>Fri, 25 Sep 2026 14:41:56 GMT</lastBuildDate>
-    <atom:link href="https://baobanxian.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <item>
-      <title><![CDATA[拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）]]></title>
-      <link>https://baobanxian.com/blog/PDF-tools</link>
-      <guid isPermaLink="true">https://baobanxian.com/blog/PDF-tools</guid>
-      <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<h1>拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）</h1>
+1:"$Sreact.fragment"
+2:I[22016,["/_next/static/chunks/3m_twg54yd802.js","/_next/static/chunks/14mrh2-p_w84d.js"],""]
+5:I[97367,["/_next/static/chunks/3m_twg54yd802.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+3:T29c3,<h1>拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）</h1>
 <p>> <strong>项目地址</strong>：<code>[你的 GitHub 仓库链接]</code>  </p>
 <p>> <strong>最新版本</strong>：v1.0.0 绿色免安装版  </p>
 <p>> <strong>技术栈</strong>：Python 3.10+ / PyMuPDF (fitz) / LibreOffice Headless / CustomTkinter / PyInstaller</p>
@@ -109,130 +99,6 @@ python run_gui.py</code></pre>
 <h2>七、 结语</h2>
 <p>因为自己在工作中频繁被 PDF 转换和压缩恶心过，所以格外希望能做出一个<strong>真正省心、体面、有温度的实用小工具</strong>。</p>
 <p>代码目前已经全部推送到 GitHub，如果这个工具碰巧帮到了你，或者为你节约了一顿开 VIP 的外卖钱，欢迎给项目点一个 <strong>⭐️ Star</strong>，这对我来说就是最大的鼓励！</p>
-<p>* 欢迎在 GitHub 提交 Issue 交流反馈，期待你的建议与共建！</p>]]></description>
-    </item>
-    <item>
-      <title><![CDATA[折腾记：把 Next.js 个人主页从 GitLab CI 移植到 GitHub Pages 的踩坑实录]]></title>
-      <link>https://baobanxian.com/blog/gitlab-ci-to-github-pages</link>
-      <guid isPermaLink="true">https://baobanxian.com/blog/gitlab-ci-to-github-pages</guid>
-      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>本以为"在 GitLab 编写代码、自动构建，然后一键部署到 GitHub Pages 展示"是一个半小时就能搞定的简单任务。</p>
-<p>然而，在打通 <strong>"GitLab CI（加工厂） ➡️ GitHub Pages（展示柜）"</strong> 链路的过程中，我结结实实地踩了四个大坑。以下是我的血泪排障记录，希望帮大家少走弯路。</p>
-<p>---</p>
-<h3>坑 1：GitLab Runner 权限不足（Docker-in-Docker 报错）</h3>
-<p>* <strong>现象</strong>：流水线刚启动，Docker 守护进程就报错崩溃：</p>
-<p>  ```text</p>
-<p>  mount: permission denied (are you root?)</p>
-<p>  Cannot connect to the Docker daemon at tcp://docker:2375.</p>
-<p>  ```</p>
-<p>* <strong>原因</strong>：自建的 GitLab Runner 默认没有开启特权模式，导致嵌套的 Docker 容器无法挂载系统安全目录。</p>
-<p>* <strong>解法</strong>：修改宿主机上的 <code>/etc/gitlab-runner/config.toml</code>，在 <code>[runners.docker]</code> 下面将特权模式开启：</p>
-<p>  ```toml</p>
-<p>  privileged = true</p>
-<p>  ```</p>
-<p>---</p>
-<h3>坑 2：样式丢失，网页白屏（Jekyll 屏蔽 <code>_next</code>）</h3>
-<p>* <strong>现象</strong>：网页部署成功，但打开全是白屏，查看控制台，发现 <code>_next/static</code> 下的所有 CSS 和 JS 文件全部 404。</p>
-<p>* <strong>原因</strong>：GitHub Pages 默认用 Jekyll 引擎解析静态网页，而 Jekyll 会<strong>自动忽略任何下划线 <code>_</code> 开头的文件夹</strong>（包括 Next.js 核心的 <code>_next</code>）。</p>
-<p>* <strong>解法</strong>：必须在部署根目录下生成一个空文件 <strong><code>.nojekyll</code></strong>，强行禁用 Jekyll 引擎。</p>
-<p>---</p>
-<h3>坑 3：通配符 <code>*</code> 漏掉了点（隐藏）文件</h3>
-<p>* <strong>现象</strong>：明明在脚本里写了 <code>touch gh-pages/.nojekyll</code>，推送上去后依然 404，发现该文件根本没被提交。</p>
-<p><em> <strong>原因</strong>：传统的 <code>cp -r out/</em> gh-pages/</code> 拷贝命令，其中的 <code>*</code> 默认<strong>无法匹配到以 <code>.</code> 开头的隐藏文件</strong>（如 <code>.nojekyll</code>）。</p>
-<p>* <strong>解法</strong>：改用末尾带点号的拷贝命令：</p>
-<p>  ```bash</p>
-<p>  cp -r out/. gh-pages/</p>
-<p>  ```</p>
-<p>---</p>
-<h3>坑 4：GitLab Pages 本地静态目录"套娃"</h3>
-<p>* <strong>现象</strong>：部署在 GitLab Pages 备份站点的网页也 404 了。</p>
-<p>* <strong>原因</strong>：在脚本里直接运行了 <code>cp -r out/ public/</code>。但由于 Next.js 源码中原本就有一个 <code>public</code> 文件夹，导致 <code>cp</code> 命令自作聪明地把整个 <code>out</code> 拷贝到了 <code>public</code> 的内部（变成了 <code>public/out/index.html</code>）。</p>
-<p>* <strong>解法</strong>：拷贝前，先无情地强制清理掉原有目录：</p>
-<p>  ```bash</p>
-<p>  rm -rf public && cp -r out/ public/</p>
-<p>  ```</p>
-<p>---</p>
-<h3>💡 终极版 <code>.gitlab-ci.yml</code> 部署脚本</h3>
-<p>在搞定上述问题，并保证 <code>GITHUB_TOKEN</code> 变量名对齐后，我最终磨砺出了这一套能<strong>完美兼顾代码体检（Lint）、构建、并同时双发部署到 GitLab & GitHub</strong> 的极简配置：</p>
-<pre><code>image: node:20
-
-stages:
-  - lint
-  - build
-  - deploy
-
-cache:
-  key:
-    files:
-      - package-lock.json
-    prefix: $CI_COMMIT_REF_SLUG
-  paths:
-    - node_modules/
-    - .next/cache/
-
-lint:
-  stage: lint
-  script:
-    - npm ci
-    - npm run lint
-  only:
-    - main
-
-build:
-  stage: build
-  script:
-    - npm ci
-    - npm run build
-  artifacts:
-    paths:
-      - out/
-    expire_in: 1 hour
-  only:
-    - main
-
-pages:
-  stage: deploy
-  script:
-    - rm -rf public
-    - cp -r out/ public/
-  artifacts:
-    paths:
-      - public/
-  only:
-    - main
-
-deploy-github:
-  stage: deploy
-  script:
-    - git clone --depth 1 https://baobanxian:${GITHUB_TOKEN}@github.com/baobanxian/baobanxian.github.io.git gh-pages
-    - rm -rf gh-pages/*
-    - cp -r out/. gh-pages/
-    - touch gh-pages/.nojekyll
-    - cd gh-pages
-    - git config user.name &quot;baobanxian&quot;
-    - git config user.email &quot;2793406287@qq.com&quot;
-    - git add .
-    - git diff --quiet &amp;&amp; git diff --staged --quiet || git commit -m &quot;Deploy $(date '+%Y-%m-%d %H:%M:%S')&quot;
-    - git push origin main
-  only:
-    - main</code></pre>
-<p>---</p>
-<h3>尾声：折腾后的收获</h3>
-<p>虽然这一遭"费了老劲"，但当看到 GitLab 和 GitHub 上同时亮起绿灯、个人主页也终于完美加载出来的那一刻，所有的抓耳挠腮都值了。</p>
-<p>技术有时候就是这样，看似十几行命令的简单流程，跨越不同的平台时却可能藏着各种不为人知的细节深坑。希望我这次用血泪摸索出来的经验，能帮正在阅读的你省下几个小时的排障时间。</p>
-<p><strong>祝大家流水线一路绿灯，部署顺利！</strong></p>]]></description>
-    </item>
-    <item>
-      <title><![CDATA[记 2026 年 7 月 10 日：我的第一个个人网页上线了]]></title>
-      <link>https://baobanxian.com/blog/my-first-website</link>
-      <guid isPermaLink="true">https://baobanxian.com/blog/my-first-website</guid>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>今天（2026 年 7 月 10 日），我的第一个个人主页终于成功部署上线了。</p>
-<p>这是一个纯粹由 HTML 和 CSS 搭建的静态页面，托管在腾讯云 CloudBase 上。虽然页面还比较基础，甚至有些简陋，但看到它真正运行在网络中、可以通过域名访问的那一刻，内心还是感到由衷的踏实。</p>
-<p>在部署的过程中，我还经历了一个令人印象深刻的小插曲。</p>
-<p>由于反复微调网页，我修改了几次 CSS 文件，但重新部署后线上页面却迟迟没有变化。折腾了半天才搞清楚，原来是浏览器和云端的缓存策略在起作用。由于对网络缓存机制不太熟悉，我一开始只是盲目地重复上传。后来，我尝试在引入 CSS 的路径后面加上版本号参数（形如 style.css?v=1.0.1）来强制浏览器拉取新文件，才终于顺利解决了问题。这个小小的调试过程，也算是给我上了一堂生动的"网络基础课"。</p>
-<p>这只是从零开始的第一步，距离那些功能丰富、交互炫酷的优秀网页还有很大的差距。但对我而言，这依然是一个值得记录的起点。</p>
-<p>接下来，我打算继续学习 JavaScript 以及更深的前端技术。希望以后能把这个自留地装扮得越来越好，也期待未来能做出更成熟的作品。继续加油！</p>]]></description>
-    </item>
-  </channel>
-</rss>
+<p>* 欢迎在 GitHub 提交 Issue 交流反馈，期待你的建议与共建！</p>0:{"rsc":["$","$1","c",{"children":[["$","main",null,{"className":"flex min-h-full justify-center px-6 pt-24 pb-16","children":["$","article",null,{"className":"w-full max-w-2xl bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-10","children":[["$","$L2",null,{"href":"/blog","className":"inline-block text-sm text-gray-400 hover:text-blue-600 mb-6","children":"← 返回博客列表"}],["$","h1",null,{"className":"text-3xl font-bold mb-2","children":"拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）"}],["$","p",null,{"className":"text-sm text-gray-400 mb-8","children":"2026-09-25"}],["$","div",null,{"className":"max-w-none [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-3 [&_p]:leading-relaxed [&_p]:mb-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-700 [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_code]:bg-gray-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:rounded-none [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4","dangerouslySetInnerHTML":{"__html":"$3"}}]]}]}],null,"$L4"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"3lUrR574ZXzWqbEZc5FTx"}
+4:["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]
+7:null
