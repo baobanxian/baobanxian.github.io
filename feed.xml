@@ -5,7 +5,7 @@
     <link>https://baobanxian.com</link>
     <description>张方宇的个人博客</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 25 Sep 2026 14:41:56 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 14:56:24 GMT</lastBuildDate>
     <atom:link href="https://baobanxian.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title><![CDATA[拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）]]></title>
@@ -13,7 +13,7 @@
       <guid isPermaLink="true">https://baobanxian.com/blog/PDF-tools</guid>
       <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[<h1>拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）</h1>
-<p>> <strong>项目地址</strong>：<code>[你的 GitHub 仓库链接]</code>  </p>
+<p>> <strong>项目地址</strong>：<code>https://github.com/baobanxian/PDF-tools</code>  </p>
 <p>> <strong>最新版本</strong>：v1.0.0 绿色免安装版  </p>
 <p>> <strong>技术栈</strong>：Python 3.10+ / PyMuPDF (fitz) / LibreOffice Headless / CustomTkinter / PyInstaller</p>
 <h2>一、 为什么做这个工具？—— 源于真实办公痛点</h2>
