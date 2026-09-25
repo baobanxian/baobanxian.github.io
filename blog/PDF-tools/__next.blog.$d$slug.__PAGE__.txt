@@ -2,7 +2,7 @@
 2:I[22016,["/_next/static/chunks/3m_twg54yd802.js","/_next/static/chunks/14mrh2-p_w84d.js"],""]
 5:I[97367,["/_next/static/chunks/3m_twg54yd802.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
 6:"$Sreact.suspense"
-3:T29ce,<h1>拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）</h1>
+3:T29f2,<h1>拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）</h1>
 <p>> <strong>项目地址</strong>：<code>https://github.com/baobanxian/PDF-tools</code>  </p>
 <p>> <strong>最新版本</strong>：v1.0.0 绿色免安装版  </p>
 <p>> <strong>技术栈</strong>：Python 3.10+ / PyMuPDF (fitz) / LibreOffice Headless / CustomTkinter / PyInstaller</p>
@@ -72,7 +72,7 @@
 <h2>五、 快速上手使用</h2>
 <p>本项目承诺<strong>永久开源、完全免费、零商业广告、零后台上传</strong>。</p>
 <h3>Windows 用户（开箱即用）：</h3>
-<p>1. 前往 GitHub 的 <strong><a href="<code>[你的 Release 链接]</code>">Releases 页面</a></strong>；</p>
+<p>1. 前往 GitHub 的 <strong><a href="<code>https://github.com/baobanxian/PDF-tools/releases/tag/v1.0.0</code>">Releases 页面</a></strong>；</p>
 <p>2. 下载 <code>PDF百宝箱_v1.0.zip</code>，解压到任意文件夹；</p>
 <p>3. 双击里面的 <strong><code>PDF百宝箱.exe</code></strong> 即可打开使用（无需安装 Python，无需安装任何运行库）。</p>
 <h3>开发者 / 源码运行（支持 Windows & macOS）：</h3>
@@ -99,6 +99,6 @@ python run_gui.py</code></pre>
 <h2>七、 结语</h2>
 <p>因为自己在工作中频繁被 PDF 转换和压缩恶心过，所以格外希望能做出一个<strong>真正省心、体面、有温度的实用小工具</strong>。</p>
 <p>代码目前已经全部推送到 GitHub，如果这个工具碰巧帮到了你，或者为你节约了一顿开 VIP 的外卖钱，欢迎给项目点一个 <strong>⭐️ Star</strong>，这对我来说就是最大的鼓励！</p>
-<p>* 欢迎在 GitHub 提交 Issue 交流反馈，期待你的建议与共建！</p>0:{"rsc":["$","$1","c",{"children":[["$","main",null,{"className":"flex min-h-full justify-center px-6 pt-24 pb-16","children":["$","article",null,{"className":"w-full max-w-2xl bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-10","children":[["$","$L2",null,{"href":"/blog","className":"inline-block text-sm text-gray-400 hover:text-blue-600 mb-6","children":"← 返回博客列表"}],["$","h1",null,{"className":"text-3xl font-bold mb-2","children":"拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）"}],["$","p",null,{"className":"text-sm text-gray-400 mb-8","children":"2026-09-25"}],["$","div",null,{"className":"max-w-none [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-3 [&_p]:leading-relaxed [&_p]:mb-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-700 [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_code]:bg-gray-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:rounded-none [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4","dangerouslySetInnerHTML":{"__html":"$3"}}]]}]}],null,"$L4"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"gTbrMQv3-7q4k-jlfTYbW"}
+<p>* 欢迎在 GitHub 提交 Issue 交流反馈，期待你的建议与共建！</p>0:{"rsc":["$","$1","c",{"children":[["$","main",null,{"className":"flex min-h-full justify-center px-6 pt-24 pb-16","children":["$","article",null,{"className":"w-full max-w-2xl bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-10","children":[["$","$L2",null,{"href":"/blog","className":"inline-block text-sm text-gray-400 hover:text-blue-600 mb-6","children":"← 返回博客列表"}],["$","h1",null,{"className":"text-3xl font-bold mb-2","children":"拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）"}],["$","p",null,{"className":"text-sm text-gray-400 mb-8","children":"2026-09-25"}],["$","div",null,{"className":"max-w-none [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-3 [&_p]:leading-relaxed [&_p]:mb-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-700 [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_code]:bg-gray-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:rounded-none [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4","dangerouslySetInnerHTML":{"__html":"$3"}}]]}]}],null,"$L4"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"VnktPg4nLj0D5C1D4Q8dU"}
 4:["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]
 7:null

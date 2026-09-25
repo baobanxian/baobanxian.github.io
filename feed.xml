@@ -5,7 +5,7 @@
     <link>https://baobanxian.com</link>
     <description>张方宇的个人博客</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 25 Sep 2026 14:56:24 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 15:25:52 GMT</lastBuildDate>
     <atom:link href="https://baobanxian.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title><![CDATA[拒绝付费套路与隐私隐患：我做了一款全能纯本地桌面端 PDF 百宝箱（完全开源）]]></title>
@@ -82,7 +82,7 @@
 <h2>五、 快速上手使用</h2>
 <p>本项目承诺<strong>永久开源、完全免费、零商业广告、零后台上传</strong>。</p>
 <h3>Windows 用户（开箱即用）：</h3>
-<p>1. 前往 GitHub 的 <strong><a href="<code>[你的 Release 链接]</code>">Releases 页面</a></strong>；</p>
+<p>1. 前往 GitHub 的 <strong><a href="<code>https://github.com/baobanxian/PDF-tools/releases/tag/v1.0.0</code>">Releases 页面</a></strong>；</p>
 <p>2. 下载 <code>PDF百宝箱_v1.0.zip</code>，解压到任意文件夹；</p>
 <p>3. 双击里面的 <strong><code>PDF百宝箱.exe</code></strong> 即可打开使用（无需安装 Python，无需安装任何运行库）。</p>
 <h3>开发者 / 源码运行（支持 Windows & macOS）：</h3>
